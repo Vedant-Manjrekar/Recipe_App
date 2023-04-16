@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Menu,
@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 export const INITIAL_STATE = {
-  VEG: false,
+  VEG: "",
   INTOLARANCE: "",
   DIET: "",
   A_CUISINE: "",
@@ -32,15 +32,20 @@ export const filterReducer = (state, action) => {
         ...state,
         A_CUISINE: action.value,
       };
-    case "INGRIEDIENTS":
+    case "INGREDIENTS":
       return {
         ...state,
-        INGRIEDIENTS: action.value,
+        INGREDIENTS: action.value,
       };
     case "Veg":
       return {
         ...state,
         VEG: true,
+      };
+    case "NVeg":
+      return {
+        ...state,
+        VEG: false,
       };
     case "Seafood":
       return {
@@ -62,11 +67,6 @@ export const filterReducer = (state, action) => {
       return {
         ...state,
         INTOLARANCE: `${state?.INTOLARANCE}, PEANUT`,
-      };
-    case "Egg":
-      return {
-        ...state,
-        INTOLARANCE: `${state?.INTOLARANCE}, EGG`,
       };
     case "Egg":
       return {
@@ -298,7 +298,7 @@ export const filterReducer = (state, action) => {
       };
 
     default:
-      break;
+      state;
   }
 };
 
@@ -306,6 +306,12 @@ function Filters({ dispatch, reducerState }) {
   function updateReducer(TYPE) {
     dispatch({ type: TYPE });
   }
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    isChecked ? updateReducer("Veg") : updateReducer("NVeg");
+  }, [reducerState.VEG]);
 
   return (
     <>
@@ -315,7 +321,7 @@ function Filters({ dispatch, reducerState }) {
           <Switch
             colorScheme='teal'
             size='md'
-            onClick={() => updateReducer("Veg")}
+            onClick={() => setIsChecked(!isChecked)}
           />
           <Text fontSize='md'>VEGETARIAN</Text>
         </Stack>

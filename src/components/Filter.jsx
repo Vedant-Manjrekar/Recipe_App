@@ -34,6 +34,7 @@ function Filter({ tags, dispatch, tagName, type }) {
           border={"2px solid #efefef"}
           borderRadius={"6px"}
           padding={".5rem 1rem"}
+          w={"68vw"}
         >
           <Text as='b' fontSize={"md"}>
             {tagName}:

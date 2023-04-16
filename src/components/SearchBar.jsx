@@ -7,7 +7,6 @@ function SearchBar({ dispatch }) {
       {/* Search */}
       <Input
         variant='filled'
-        className='search'
         w={"60vw"}
         h={"7vh"}
         placeholder='Ingredients'
