@@ -21,11 +21,9 @@ function App() {
   }&excludeCuisine=${reducerState.A_CUISINE.slice(2)}`;
 
   async function fetchData() {
-    console.log("Fetching data...");
     const api_data = await fetch(API_URL);
     const data = await api_data.json();
     setApiData(data.results);
-    console.log(data);
   }
 
   return (

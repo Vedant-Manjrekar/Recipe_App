@@ -37,7 +37,6 @@ function Recipe({ data }) {
     onOpen: onOpen1,
     onClose: onClose1,
   } = useDisclosure();
-  console.log(data);
   return (
     <>
       <Accordion
